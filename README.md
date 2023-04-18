@@ -1,5 +1,12 @@
 # my-app
 
+Tools
+
+- Vue.js
+- Webpack
+- Babel
+- ESLint
+
 ## Project setup
 ```
 npm install
