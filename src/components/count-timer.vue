@@ -1,26 +1,38 @@
 <template>
   <article v-if="loaded" class="countdown-timer">
-    <h2 v-if="!expired">Countdown to RWC 2023</h2>
-    <h3 v-else class="timer-finished">It's Time! <a href="https://www.rugbyworldcup.com/2023">See the RWC 2023 match schedule</a></h3>
-    <div class="countdown-wrapper">
-      <div class="digit-container">
-        <p class="time tdays">{{ displayDays }}</p>
-        <p class="count-type">Days</p>
-      </div>
-      <div class="digit-container">
-        <p class="time thrs">{{ displayHours }}</p>
-        <p class="count-type">Hours</p>
-      </div>
-      <div class="digit-container">
-        <p class="time tmins">{{ displayMinutes }}</p>
-        <p class="count-type">Minutes</p>
-      </div>
-      <div class="digit-container">
-        <p class="time tsecs">{{ displaySeconds }}</p>
-        <p class="count-type">Seconds</p>
+    <div v-if="!expired">
+      <h2 class="sr-only">Countdown to RWC 2023</h2>
+      <div class="countdown-wrapper">
+        <div class="count-container">
+          <div class="digit-container">
+            <p class="time tdays">{{ displayDays }}</p>
+          </div>
+          <p class="count-type">Days</p>
+        </div>
+        <div class="count-container">
+          <div class="digit-container">
+            <p class="time thrs">{{ displayHours }}</p>
+          </div>
+          <p class="count-type">Hours</p>
+        </div>
+        <div class="count-container">
+          <div class="digit-container">
+            <p class="time tmins">{{ displayMinutes }}</p>
+          </div>
+            <p class="count-type">Minutes</p>
+        </div>
+        <div class="count-container">
+          <div class="digit-container">
+            <p class="time tsecs">{{ displaySeconds }}</p>
+          </div>
+          <p class="count-type">Seconds</p>
+        </div>
       </div>
     </div>
-    
+    <div v-else class="timer-finished">
+      <h3>It's Time!</h3>
+      <a href="https://www.rugbyworldcup.com/2023" class="schedule-link">See the RWC 2023 match schedule</a>
+    </div>
   </article>
      
 </template>
@@ -98,47 +110,61 @@ export default {
 </script>
 
 <style lang="scss">
-  * {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-  }
-  $primary-wht-color: #fafafa;
-  $h2-font-sz: 30px;
-  $digit-font-sz: 40px;
-  $count-font-sz: 14px;
+  $primary-wht-color: hsl(0, 0%, 98%, 1.0);
+  $bg-wht-variation: hsl(0, 0%, 98%, 0.6);
+  $primary-blu-color: hsl(240, 50%, 20%, 1.0);
+  $hd-font-sz: 100px;
+  $digit-font-sz: 85px;
+  $count-font-sz: 22px;
   $space-base: 1rem;
   @mixin placement($display: flex, $flexdir: row, $align: center, $justify: center) {
-  display: $display;
-  flex-direction: $flexdir;
-  align-items: $align;
-  justify-content: $justify;
+    display: $display;
+    flex-direction: $flexdir;
+    align-items: $align;
+    justify-content: $justify;
   }
   @mixin box-shadow() {
-  box-shadow: 2px 2px 5px 1px hsla(0, 0%, 0%, 0.1);
+    box-shadow: 2px 2px 5px 1px hsla(0, 0%, 0%, 0.1);
   }
+
   .countdown-timer {
-    background: $primary-wht-color;
-    padding: calc(1.5 * $space-base) $space-base;
-    @include box-shadow();
+    width: 80vw;
+    max-width: 72rem;
+    background: $bg-wht-variation;
+    padding: calc(3.25 * $space-base);
+    margin-bottom: 4rem;
+    @include placement(flex);
+  }
+  h2, h3 {
+    font-size: $hd-font-sz;
+    
   }
   .countdown-wrapper {
-    margin: 0 auto;
     @include placement(flex);
-    column-gap: calc(1.5 *$space-base);
+    column-gap: calc(5 * $space-base);
   }
-  h2 {
-    font-size: $h2-font-sz;
-    margin-bottom: calc(2 * $space-base);
+  .digit-container {
+    width: 10.5vw;
+    max-width: 10rem;
+    height: 10.5vw;
+    max-height: 10rem;
+    background: $primary-blu-color;
+    border-radius: 20px;
+    @include placement(flex);
   }
   .time {
     font-size: $digit-font-sz;
+    color: $primary-wht-color;
+  }
+  .thrs {
+    padding-left: calc(0.5 * $space-base);
   }
   .count-type {
-    margin-top: $space-base;
+    font-weight: 500;
     font-size: $count-font-sz;
     text-transform: uppercase;
-    letter-spacing: 1px;
+    letter-spacing: 3%;
+    margin: calc(2.75 * $space-base) 0 calc(-1 * $space-base) 0;
   }
   
 </style>
