@@ -1,39 +1,41 @@
 <template>
-  <article v-if="loaded" class="countdown-timer">
-    <div v-if="!expired">
-      <h2 class="sr-only">Countdown to RWC 2023</h2>
-      <div class="countdown-wrapper">
-        <div class="count-container">
-          <div class="digit-container">
-            <p class="time tdays">{{ displayDays }}</p>
+  <div class="component-wrapper">
+    <article v-if="loaded" class="countdown-timer">
+      <div v-if="!expired">
+        <h2 class="sr-only">Countdown to RWC 2023</h2>
+        <div class="countdown-wrapper">
+          <div class="count-container">
+            <div class="digit-container">
+              <p class="time tdays">{{ displayDays }}</p>
+            </div>
+            <p class="count-type">Days</p>
           </div>
-          <p class="count-type">Days</p>
-        </div>
-        <div class="count-container">
-          <div class="digit-container">
-            <p class="time thrs">{{ displayHours }}</p>
+          <div class="count-container">
+            <div class="digit-container">
+              <p class="time thrs">{{ displayHours }}</p>
+            </div>
+            <p class="count-type">Hours</p>
           </div>
-          <p class="count-type">Hours</p>
-        </div>
-        <div class="count-container">
-          <div class="digit-container">
-            <p class="time tmins">{{ displayMinutes }}</p>
-          </div>
+          <div class="count-container">
+            <div class="digit-container">
+              <p class="time tmins">{{ displayMinutes }}</p>
+            </div>
             <p class="count-type">Minutes</p>
-        </div>
-        <div class="count-container">
-          <div class="digit-container">
-            <p class="time tsecs">{{ displaySeconds }}</p>
           </div>
-          <p class="count-type">Seconds</p>
+          <div class="count-container">
+            <div class="digit-container">
+              <p class="time tsecs">{{ displaySeconds }}</p>
+            </div>
+            <p class="count-type">Seconds</p>
+          </div>
         </div>
       </div>
-    </div>
-    <div v-else class="timer-finished">
-      <h3>It's Time!</h3>
-      <a href="https://www.rugbyworldcup.com/2023" class="schedule-link">See the RWC 2023 match schedule</a>
-    </div>
-  </article>
+      <div v-else class="timer-finished">
+        <h3>It's Time!</h3>
+        <a href="https://www.rugbyworldcup.com/2023" class="schedule-link">See the RWC 2023 match schedule</a>
+      </div>
+    </article>
+  </div>
      
 </template>
 
@@ -111,11 +113,11 @@ export default {
 
 <style lang="scss">
   $primary-wht-color: hsl(0, 0%, 98%, 1.0);
-  $bg-wht-variation: hsl(0, 0%, 98%, 0.6);
+  $bg-wht-variation: hsl(0, 0%, 98%, 0.3);
   $primary-blu-color: hsl(240, 50%, 20%, 1.0);
   $hd-font-sz: 100px;
-  $digit-font-sz: 85px;
-  $count-font-sz: 22px;
+  $digit-font-sz: 60px;//85px;
+  $count-font-sz: 16px;//22px;
   $space-base: 1rem;
   @mixin placement($display: flex, $flexdir: row, $align: center, $justify: center) {
     display: $display;
@@ -123,48 +125,101 @@ export default {
     align-items: $align;
     justify-content: $justify;
   }
+  @mixin position($pos, $top: auto, $left: auto, $btm: auto, $right: auto) {
+  position: $pos;
+  top: $top;
+  left: $left;
+  bottom: $btm;
+  right: $right;
+  }
   @mixin box-shadow() {
     box-shadow: 2px 2px 5px 1px hsla(0, 0%, 0%, 0.1);
   }
+  @mixin bp($point) {
+    @if $point == plant {
+      @media (min-width: 1400px) { @content; }
+    }
+    @else if $point == sprout {
+      @media (min-width: 1000px) { @content; }
+    }
+    @else if $point == seedling {
+      @media (min-width: 800px) { @content; }
+    }
+    @else if $point == seed {
+      @media (min-width: 640px) { @content; }
+    } 
+  }
 
-  .countdown-timer {
-    width: 80vw;
-    max-width: 72rem;
-    background: $bg-wht-variation;
-    padding: calc(3.25 * $space-base);
-    margin-bottom: 4rem;
-    @include placement(flex);
-  }
-  h2, h3 {
-    font-size: $hd-font-sz;
-    
-  }
+  //.component-wrapper {
+    //@include bp(seed) {
+      //@include position(absolute);
+    //}
+  //}
+  //.countdown-timer {
+    //margin-top: 19vh;
+    //@include bp(seed) {
+      //margin-top: 0;
+      //@include position(relative, $top: 40vh);
+      
+    //}
+  //}
   .countdown-wrapper {
-    @include placement(flex);
-    column-gap: calc(5 * $space-base);
+    display: grid;
+    align-items: center;
+    grid-template-columns: repeat(auto-fit, minmax(17.8125rem, 1fr));
+    @include bp(seed) {
+      width: 90vw;
+      max-width: 72rem;
+      padding: 2rem 0;
+      margin: 0 auto;
+      grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+      border: 0.5px solid $primary-wht-color;
+    }
+    @include bp(sprout) {
+      background: $bg-wht-variation;
+      border: none;
+      padding: 2rem 4rem;
+      @include position(absolute, $top: 40vw, $left: 0, $right: 0);
+    }
+  }
+  .count-container {
+    width: 100%;
+    max-width: 17.8125rem;
+    margin: $space-base auto;
+    @include placement(flex, row, center, flex-start);
+    column-gap: calc(2* $space-base);
+    color: $primary-wht-color;
+    @include bp(seed) {
+      width: 10rem;
+      @include placement(flex, column, center, center);
+    }
   }
   .digit-container {
-    width: 10.5vw;
-    max-width: 10rem;
-    height: 10.5vw;
-    max-height: 10rem;
-    background: $primary-blu-color;
-    border-radius: 20px;
-    @include placement(flex);
+    width: 50%;
+    @include bp(seed) {
+      @include placement(flex);
+    }
+    @include bp(sprout) {
+      width: 10rem;
+      height: 10rem;
+      background: $primary-blu-color;
+      border-radius: 20px;
+    }
   }
   .time {
     font-size: $digit-font-sz;
-    color: $primary-wht-color;
-  }
-  .thrs {
-    padding-left: calc(0.5 * $space-base);
   }
   .count-type {
     font-weight: 500;
     font-size: $count-font-sz;
     text-transform: uppercase;
-    letter-spacing: 3%;
-    margin: calc(2.75 * $space-base) 0 calc(-1 * $space-base) 0;
+    letter-spacing: 2px;
+    @include bp(seed) {
+      margin-top: calc(2 * $space-base);
+    }
+    @include bp(sprout) {
+      color: #000;
+    }
   }
   
 </style>
