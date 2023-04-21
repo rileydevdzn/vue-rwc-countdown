@@ -78,9 +78,10 @@ export default {
   }
 
   body {
+    font-family: 'Jost', sans-serif;
+    font-weight: 400;
     text-align: center;
     background: $primary-blu-color;
-    
   }
   .sr-only {
   clip: rect(0 0 0 0); 

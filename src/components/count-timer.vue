@@ -152,6 +152,10 @@ export default {
     } 
   }
 
+  body {
+    font-family: 'Jost', sans-serif;
+    font-weight: 400;
+  }
 
   .countdown-wrapper {
     display: grid;
