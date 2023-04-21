@@ -112,51 +112,20 @@ export default {
 </script>
 
 <style lang="scss">
-  $primary-wht-color: hsl(0, 0%, 98%, 1.0);
-  $bg-wht-variation: hsl(0, 0%, 98%, 0.2);
-  $primary-blu-color: hsl(240, 50%, 20%, 1.0);
-  $font-base: 1rem;
-  $hd-font-sz: clamp(calc(3.75 * $font-base), calc(3.31 * $font-base) + 1.878vw, calc(5 * $font-base));
-  $digit-font-sz: calc(3.75 * $font-base);
-  $count-font-sz: clamp($font-base, calc(0.83 * $font-base) + 0.73vw, calc(1.375 * $font-base));
-  $space-base: 1rem;
+  $hd-font-sz: clamp(calc(3.75 * $font-sz-base), calc(3.31 * $font-sz-base) + 1.878vw, calc(5 * $font-sz-base));
+  $digit-font-sz: calc(3.75 * $font-sz-base);
+  $count-font-sz: clamp($font-sz-base, calc(0.83 * $font-sz-base) + 0.73vw, calc(1.375 * $font-sz-base));
 
-  @mixin placement($display: flex, $flexdir: row, $align: center, $justify: center) {
-    display: $display;
-    flex-direction: $flexdir;
-    align-items: $align;
-    justify-content: $justify;
-  }
-  @mixin position($pos, $top: auto, $left: auto, $btm: auto, $right: auto) {
-  position: $pos;
-  top: $top;
-  left: $left;
-  bottom: $btm;
-  right: $right;
-  }
-  @mixin box-shadow() {
-    box-shadow: 2px 2px 5px 1px hsla(0, 0%, 0%, 0.1);
-  }
-  @mixin bp($point) {
-    @if $point == plant {
-      @media (min-width: 1400px) { @content; }
-    }
-    @else if $point == sprout {
-      @media (min-width: 1000px) { @content; }
-    }
-    @else if $point == seedling {
-      @media (min-width: 800px) { @content; }
-    }
-    @else if $point == seed {
-      @media (min-width: 640px) { @content; }
-    } 
-  }
 
+  * {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  }
   body {
-    font-family: 'Jost', sans-serif;
-    font-weight: 400;
+    font: $font-wt-norm #{$font-sz-base}/#{$body-txt-lnht} $sans-serif;
+    color: $primary-wht-color;
   }
-
   .countdown-wrapper {
     display: grid;
     align-items: center;
@@ -182,7 +151,6 @@ export default {
     margin: $space-base auto;
     @include placement(flex, row, center, flex-start);
     column-gap: calc(2* $space-base);
-    color: $primary-wht-color;
     @include bp(seed) {
       width: calc(10 * $space-base);
       @include placement(flex, column, center, center);
@@ -204,7 +172,7 @@ export default {
     font-size: $digit-font-sz;
   }
   .count-type {
-    font-weight: 500;
+    font-weight: $font-wt-med;
     font-size: $count-font-sz;
     text-transform: uppercase;
     letter-spacing: 2px;
@@ -219,7 +187,6 @@ export default {
     margin: 0 auto;
     font-size: $hd-font-sz;
     color: $primary-wht-color;
-
     @include bp(seed) {
       border: 0.5px solid $primary-wht-color;
     }

@@ -1,0 +1,50 @@
+$primary-wht-color: hsl(0, 0%, 98%, 1.0);
+$bg-wht-variation: hsl(0, 0%, 98%, 0.2);
+$primary-blu-color: hsl(240, 50%, 20%, 1.0);
+
+$sans-serif: 'Jost', sans-serif;
+$font-wt-norm: 400;
+$font-wt-med: 500;
+
+$font-sz-base: 1rem;
+$body-txt-lnht: 1.2;
+
+$space-base: 1rem;
+
+@mixin placement($display: flex, $flexdir: row, $align: center, $justify: center) {
+  display: $display;
+  flex-direction: $flexdir;
+  align-items: $align;
+  justify-content: $justify;
+}
+@mixin position($pos, $top: auto, $left: auto, $btm: auto, $right: auto) {
+position: $pos;
+top: $top;
+left: $left;
+bottom: $btm;
+right: $right;
+}
+@mixin box-shadow() {
+  box-shadow: 2px 2px 5px 1px hsla(0, 0%, 0%, 0.1);
+}
+@mixin transition($properties, $dur: 0.2s) {
+  @each $property in $properties {
+    transition-property: $property;
+  }
+  transition-duration: $dur;
+  transition-timing-function: ease;
+}
+@mixin bp($point) {
+  @if $point == plant {
+    @media (min-width: 1400px) { @content; }
+  }
+  @else if $point == sprout {
+    @media (min-width: 1000px) { @content; }
+  }
+  @else if $point == seedling {
+    @media (min-width: 800px) { @content; }
+  }
+  @else if $point == seed {
+    @media (min-width: 640px) { @content; }
+  } 
+}
