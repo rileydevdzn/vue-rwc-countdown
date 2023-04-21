@@ -37,6 +37,8 @@ export default {
   $primary-wht-color: hsl(0, 0%, 98%, 1.0);
   $bg-wht-variation: hsl(0, 0%, 98%, 0.7);
   $primary-blu-color: hsl(240, 50%, 20%, 1.0);
+  $font-base: 1rem;
+  $space-base: 1rem;
   @mixin placement($display: flex, $flexdir: row, $align: center, $justify: center) {
   display: $display;
   flex-direction: $flexdir;
@@ -95,7 +97,6 @@ main {
   @include bp(seed) {
     height: auto;
   }
-  
 }
 .hero {
   width: 100%;
@@ -106,20 +107,20 @@ main {
   width: 100%;
   object-fit: cover;
   @include bp(seed) {
-    margin-bottom: 4rem;
+    margin-bottom: calc(4 * $space-base);
   }
 }
 .rwc-link {
   width: 10rem;
   background: $primary-wht-color;
-  border-radius: 16px;
+  border-radius: $space-base;
   margin: 0 auto -4rem auto;
   @include placement(flex);
-  @include position(relative, $top: -6rem);
+  @include position(relative, $top: calc(-6 * $space-base));
   @include box-shadow();
   cursor: pointer;
   @include bp(seed) {
-    @include position (absolute, $top: 3rem, $right: 3rem);
+    @include position (absolute, $top: calc(3 * $space-base), $right: calc(3 * $space-base));
     z-index: 10;
     @include transition(transform);
     &:hover {
@@ -128,6 +129,6 @@ main {
   }
 }
 .rwc-logo {
-  width: 10rem;
+  width: calc(10 * $space-base);
 }
 </style>

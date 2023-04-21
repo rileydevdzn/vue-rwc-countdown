@@ -113,12 +113,14 @@ export default {
 
 <style lang="scss">
   $primary-wht-color: hsl(0, 0%, 98%, 1.0);
-  $bg-wht-variation: hsl(0, 0%, 98%, 0.3);
+  $bg-wht-variation: hsl(0, 0%, 98%, 0.2);
   $primary-blu-color: hsl(240, 50%, 20%, 1.0);
-  $hd-font-sz: 100px;
-  $digit-font-sz: 60px;//85px;
-  $count-font-sz: 16px;//22px;
+  $font-base: 1rem;
+  $hd-font-sz: clamp(calc(3.75 * $font-base), calc(3.31 * $font-base) + 1.878vw, calc(5 * $font-base));
+  $digit-font-sz: calc(3.75 * $font-base);
+  $count-font-sz: clamp($font-base, calc(0.83 * $font-base) + 0.73vw, calc(1.375 * $font-base));
   $space-base: 1rem;
+
   @mixin placement($display: flex, $flexdir: row, $align: center, $justify: center) {
     display: $display;
     flex-direction: $flexdir;
@@ -150,47 +152,35 @@ export default {
     } 
   }
 
-  //.component-wrapper {
-    //@include bp(seed) {
-      //@include position(absolute);
-    //}
-  //}
-  //.countdown-timer {
-    //margin-top: 19vh;
-    //@include bp(seed) {
-      //margin-top: 0;
-      //@include position(relative, $top: 40vh);
-      
-    //}
-  //}
+
   .countdown-wrapper {
     display: grid;
     align-items: center;
-    grid-template-columns: repeat(auto-fit, minmax(17.8125rem, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(calc(17.8125 * $space-base), 1fr));
     @include bp(seed) {
       width: 90vw;
-      max-width: 72rem;
-      padding: 2rem 0;
+      max-width: calc(72 * $space-base);
+      padding: $space-base 0;
       margin: 0 auto;
-      grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(calc(10 * $space-base), 1fr));
       border: 0.5px solid $primary-wht-color;
     }
     @include bp(sprout) {
       background: $bg-wht-variation;
       border: none;
-      padding: 2rem 4rem;
-      @include position(absolute, $top: 40vw, $left: 0, $right: 0);
+      padding: calc(2.5 * $space-base) clamp(calc(2 * $space-base), calc(-8 * $space-base) + 16vw, calc(4 * $space-base)) calc(1.5 * $space-base) clamp(calc(2 * $space-base), calc(-8 * $space-base) + 16vw, calc(4 * $space-base));
+      @include position(absolute, $top: 35vw, $left: 0, $right: 0);
     }
   }
   .count-container {
     width: 100%;
-    max-width: 17.8125rem;
+    max-width: calc(17.8125 * $space-base);
     margin: $space-base auto;
     @include placement(flex, row, center, flex-start);
     column-gap: calc(2* $space-base);
     color: $primary-wht-color;
     @include bp(seed) {
-      width: 10rem;
+      width: calc(10 * $space-base);
       @include placement(flex, column, center, center);
     }
   }
@@ -200,10 +190,10 @@ export default {
       @include placement(flex);
     }
     @include bp(sprout) {
-      width: 10rem;
-      height: 10rem;
+      width: calc(9 * $space-base);
+      height: calc(9 * $space-base);
       background: $primary-blu-color;
-      border-radius: 20px;
+      border-radius: calc(1.25 * $space-base);
     }
   }
   .time {
@@ -215,11 +205,29 @@ export default {
     text-transform: uppercase;
     letter-spacing: 2px;
     @include bp(seed) {
-      margin-top: calc(2 * $space-base);
-    }
-    @include bp(sprout) {
-      color: #000;
+      margin-top: clamp(calc(1.5 * $space-base), calc(-1 * $space-base) + 4vw, calc(2 * $space-base));
     }
   }
-  
+  .timer-finished {
+    width: 90vw;
+    max-width: calc(72 * $space-base);
+    padding: $space-base 0;
+    margin: 0 auto;
+    font-size: $hd-font-sz;
+    color: $primary-wht-color;
+
+    @include bp(seed) {
+      border: 0.5px solid $primary-wht-color;
+    }
+    @include bp(sprout) {
+      background: $bg-wht-variation;
+      border: none;
+      padding: calc(2.5 * $space-base) clamp(calc(2 * $space-base), calc(-8 * $space-base) + 16vw, calc(4 * $space-base)) calc(1.5 * $space-base) clamp(calc(2 * $space-base), calc(-8 * $space-base) + 16vw, calc(4 * $space-base));
+      @include position(absolute, $top: 35vw, $left: 0, $right: 0);
+    }
+    a {
+      font-size: $count-font-sz;
+      color: inherit;
+    }
+  }
 </style>
