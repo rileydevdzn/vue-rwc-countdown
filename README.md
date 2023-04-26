@@ -54,8 +54,6 @@ View live page: [Vue.js Countdown Timer](https://rileydevdzn.github.io/vue-rwc-c
 - Creating a countdown
   - [Creating a countdown](#creating-a-countdown)
 
-</br>
-
 ## Build details
 
 ### Features
@@ -160,8 +158,6 @@ export default {
   },
 }
 ```
-
-</br>
 
 ### What I learned
 
