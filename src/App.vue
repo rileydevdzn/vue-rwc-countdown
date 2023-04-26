@@ -2,7 +2,7 @@
   <main>
     <section class="hero">
       <img class="hero-img" src="~@/assets/rwc-timer-bg-lg.jpg"/>
-      <a class="rwc-link"><img src="~@/assets/RWC-logo.png" class="rwc-logo"/><span class="sr-only">Visit Rugby World Cup 2023 Homepage</span></a>
+      <a class="rwc-link" href="https://www.rugbyworldcup.com/2023"><img src="~@/assets/RWC-logo.png" class="rwc-logo"/><span class="sr-only">Visit Rugby World Cup 2023 Homepage</span></a>
     
       <div class="timer">
         <countTimerVue
