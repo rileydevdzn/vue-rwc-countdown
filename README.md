@@ -26,8 +26,6 @@
   - [What I learned](#what-i-learned)
 - [Author](#author)
 
-</br>
-
 ## Tools
 
 - Vue.js
@@ -35,8 +33,6 @@
 - Babel
 - ESLint
 - SASS
-
-</br>
 
 ## Overview
 
@@ -47,13 +43,9 @@ My build needed to fulfill the following:
 - mobile-first design
 - creating a countdown based on today's date and the start date of Rugby World Cup
 
-</br>
-
 ### Links
 
 View live page: [Vue.js Countdown Timer](https://rileydevdzn.github.io/vue-rwc-countdown/)
-
-</br>
 
 ### Highlights
 
@@ -112,8 +104,6 @@ For the desktop design, I overlaid the horizontal countdown timer over the photo
     width="100%">
   <p><em>Desktop version</em></p>
 </div>
-
-</br>
 
 #### *Creating a countdown*
 
@@ -179,15 +169,11 @@ export default {
 
 I learned a lot about working with dates and times in JavaScript through this project. I was also able to practice refactoring my code to better adhere to DRY principles for repeated calculations.
 
-</br>
-
 #### *Using v-if with component states*
 
 In the completed the countdown timer, I noticed that there was a flash of zeros when the page was first pulled up or refreshed. After doing some research, I figured out I could use `v-if` on the component's load state to ensure the timer didn't display until the page was loaded. This gives a slight pause before the timer displays on load, but was more desirable than the flash of zeros. 
 
 I also added a parent container with `v-if` to the countdown timer, along with a sibling `v-else` for when the timer reaches zero, that will display the message "It's Time!" and a link to the match schedule on the official RWC 2023 website when the countdown expires.
-
-</br>
 
 ## Author
 
