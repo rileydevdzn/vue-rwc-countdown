@@ -18,7 +18,7 @@
 ## Table of contents
 
 - [Overview](#overview)
-  <!--- [Links](#links)-->  
+  - [Links](#links) 
   - [Highlights](#highlights)
 - [Build details](#build-details)
   - [Features](#features)
@@ -38,11 +38,11 @@ My build needed to fulfill the following:
 
 </br>
 
-<!--### Links
+### Links
 
-View live page: [Vue.js Countdown Timer]()
+View live page: [Vue.js Countdown Timer](https://rileydevdzn.github.io/vue-rwc-countdown/)
 
-</br>-->
+</br>
 
 ### Highlights
 
