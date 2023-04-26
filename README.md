@@ -17,6 +17,7 @@
 
 ## Table of contents
 
+- [Tools](#tools)
 - [Overview](#overview)
   - [Links](#links) 
   - [Highlights](#highlights)
@@ -24,6 +25,16 @@
   - [Features](#features)
   - [What I learned](#what-i-learned)
 - [Author](#author)
+
+</br>
+
+## Tools
+
+- Vue.js
+- Webpack
+- Babel
+- ESLint
+- SASS
 
 </br>
 
@@ -50,8 +61,6 @@ View live page: [Vue.js Countdown Timer](https://rileydevdzn.github.io/vue-rwc-c
   - [Shifting layouts from mobile to desktop](#mobile-first-design)
 - Creating a countdown
   - [Creating a countdown](#creating-a-countdown)
-
-</br>
 
 </br>
 
@@ -106,74 +115,80 @@ For the desktop design, I overlaid the horizontal countdown timer over the photo
 
 </br>
 
-
 #### *Creating a countdown*
 
+My first step in creating the timer was to calculate the time remaining using the JavaScript `date` object, where my `nowDate` represented today's date and my `endDate` represented the RWC opening match date. I originally hardcoded the end date, then later refactored this to include an updatable version where the values could be changed from the main App.vue, using props and computed values. 
 
+```js
+const nowDate = new Date();
+// hardcoded version...const endDate = new Date(2023, 8, 8, 21, 15, 0);
+let distance = this.endDate.getTime() - nowDate.getTime();
+```
 
+Next, I needed to format the days, hours, minutes, and seconds values. I used computed values along with `Math.floor()` to avoid writing out the calculations repeatedly.
 
+```js
+export default {
+  computed: {
+    secondsCalc: () => 1000,
+    minutesCalc() {
+      return this.secondsCalc * 60
+    },
+    hoursCalc() {
+      return this.minutesCalc * 60
+    },
+    daysCalc() {
+      return this.hoursCalc * 24
+    },
+    // ...
+  },
+  methods: {
+    // ...
+    const days = Math.floor((distance / this.daysCalc));
+    const hours = Math.floor((distance % this.daysCalc) / this.hoursCalc);
+    const minutes = Math.floor((distance % this.hoursCalc) / this.minutesCalc);
+    const seconds = Math.floor((distance % this.minutesCalc) / this.secondsCalc);
+    // ...
+  }
+}
+```
+
+Then I adjusted the format so that single digits included a leading zero, and finally displayed the data.
+
+```js
+export default {
+  methods: {
+    formatDigit: digit => (digit < 10 ? "0" + digit : digit),
+    // ...
+    showRemaining() {
+      // ...
+      this.displaySeconds = this.formatDigit(seconds);
+      this.displayMinutes = this.formatDigit(minutes);
+      this.displayHours = this.formatDigit(hours);
+      this.displayDays = this.formatDigit(days);
+    },
+  },
+}
+```
 
 </br>
-
-
 
 ### What I learned
 
 #### *JavaScript `date` object*
 
-
-mention updatable end date instead of hardcoded 
+I learned a lot about working with dates and times in JavaScript through this project. I was also able to practice refactoring my code to better adhere to DRY principles for repeated calculations.
 
 </br>
 
+#### *Using v-if with component states*
 
-#### *Using v-if with component load states*
+In the completed the countdown timer, I noticed that there was a flash of zeros when the page was first pulled up or refreshed. After doing some research, I figured out I could use `v-if` on the component's load state to ensure the timer didn't display until the page was loaded. This gives a slight pause before the timer displays on load, but was more desirable than the flash of zeros. 
 
-
-
-
-I also included a v-else for when the timer reaches zero, with a simple "It's Time!" message and a link to the match schedule on the official RWC 2023 website.
-
+I also added a parent container with `v-if` to the countdown timer, along with a sibling `v-else` for when the timer reaches zero, that will display the message "It's Time!" and a link to the match schedule on the official RWC 2023 website when the countdown expires.
 
 </br>
 
 ## Author
 
 - Riley - [View Portfolio](https://rileydevdzn.webflow.io)
-
-
-<!--ORIGINAL README
-
-# my-app
-
-Tools
-
-- Vue.js
-- Webpack
-- Babel
-- ESLint
-
-## Project setup
-```
-npm install
-```
-
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
-
--->
